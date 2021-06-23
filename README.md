@@ -7,12 +7,12 @@ Positional arguments for the ldap query and comma-separated attributes to return
 
 If no attributes are specified, all attributes are returned for each object in the query's results 
 ```
-execute-assembly /path/to/SharpLDAPSearch.exe "ldap query" "attributes,to,return"
+execute-assembly /path/to/SharpLDAPSearch.exe /filter:"ldap query" /properties:"attributes,to,return" /ldap:"LDAP://DC=test,DC=local"
 ```
 
 ## Example
 ```
-SharpLDAPSearch.exe "(&(objectClass=user)(cn=*svc*))" "samaccountname"
+SharpLDAPSearch.exe /filter:"(&(objectClass=user)(cn=*svc*))" /properties:"samaccountname" /ldap:"LDAP://DC=test,DC=local"
 ```
 ### Output
 ```
