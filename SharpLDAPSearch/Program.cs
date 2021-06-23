@@ -6,21 +6,26 @@ using System.Linq;
 namespace SharpLDAPSearch
 {
     class Program
-    {
+    { 
         static void Main(string[] args)
         {
-            DirectoryEntry entry = new DirectoryEntry();
+
+			string ldap = Util.getArgsByName("ldap", args);
+			string filter = Util.getArgsByName("filter", args);
+			string props = Util.getArgsByName("properties", args);
+
+			DirectoryEntry entry = new DirectoryEntry(ldap);
             DirectorySearcher mySearcher = new DirectorySearcher(entry);
+			mySearcher.SecurityMasks = SecurityMasks.Dacl;
             List<string> searchProperties = new List<string>();
-            //get LDAP search filter
-            if (args.Length > 0)
+            if (filter != string.Empty)
             {
-                //example LDAP filter
-                //mySearcher.Filter = ("(&(objectCategory=computer)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))");
-                mySearcher.Filter = args[0];
-                if (args.Length > 1)
+				//example LDAP filter
+				//mySearcher.Filter = ("(&(objectCategory=computer)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))");
+				mySearcher.Filter = filter;
+                if (props != string.Empty)
                 {
-                    searchProperties = args[1].Split(',').ToList();
+                    searchProperties = props.Split(',').ToList();
                     foreach (string myKey in searchProperties)
                     {
                         mySearcher.PropertiesToLoad.Add(myKey);
@@ -35,14 +40,12 @@ namespace SharpLDAPSearch
 
             mySearcher.SizeLimit = int.MaxValue;
             mySearcher.PageSize = int.MaxValue;
-
             try
             {
                 foreach (SearchResult mySearchResult in mySearcher.FindAll())
                 {
                     // Get the 'DirectoryEntry' that corresponds to 'mySearchResult'.  
                     DirectoryEntry myDirectoryEntry = mySearchResult.GetDirectoryEntry();
-
                     // Get the properties of the 'mySearchResult'.  
                     ResultPropertyCollection myResultPropColl;
                     myResultPropColl = mySearchResult.Properties;
@@ -55,7 +58,7 @@ namespace SharpLDAPSearch
                             // some attributes - such as memberof - have multiple values
                             for (int i = 0; i < mySearchResult.Properties[attr].Count; i++)
                             {
-                                Console.WriteLine(mySearchResult.Properties[attr][i].ToString());
+								Console.WriteLine(mySearchResult.Properties[attr][i].ToString());
                             }
                         }
                     }

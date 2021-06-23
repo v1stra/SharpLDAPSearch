@@ -1,0 +1,6 @@
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\bin\Debug\SharpLDAPSearch.exe
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\bin\Debug\SharpLDAPSearch.pdb
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\obj\Debug\SharpLDAPSearch.csprojAssemblyReference.cache
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\obj\Debug\SharpLDAPSearch.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\obj\Debug\SharpLDAPSearch.exe
+C:\Users\user\source\repos\SharpLDAPSearch\SharpLDAPSearch\obj\Debug\SharpLDAPSearch.pdb
