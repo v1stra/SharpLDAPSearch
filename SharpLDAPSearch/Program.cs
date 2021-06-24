@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Linq;
@@ -10,19 +10,17 @@ namespace SharpLDAPSearch
         static void Main(string[] args)
         {
 
-			string ldap = Util.getArgsByName("ldap", args);
-			string filter = Util.getArgsByName("filter", args);
-			string props = Util.getArgsByName("properties", args);
+            string ldap = Util.getArgsByName("ldap", args);
+            string filter = Util.getArgsByName("filter", args);
+            string props = Util.getArgsByName("properties", args);
 
-			DirectoryEntry entry = new DirectoryEntry(ldap);
+            DirectoryEntry entry = new DirectoryEntry(ldap);
             DirectorySearcher mySearcher = new DirectorySearcher(entry);
-			mySearcher.SecurityMasks = SecurityMasks.Dacl;
+            mySearcher.SecurityMasks = SecurityMasks.Dacl;
             List<string> searchProperties = new List<string>();
             if (filter != string.Empty)
             {
-				//example LDAP filter
-				//mySearcher.Filter = ("(&(objectCategory=computer)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))");
-				mySearcher.Filter = filter;
+                mySearcher.Filter = filter;
                 if (props != string.Empty)
                 {
                     searchProperties = props.Split(',').ToList();
